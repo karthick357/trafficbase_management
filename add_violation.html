@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Log Violation — traffic_case_tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-hex">🛡</div>
+    <span class="nav-title">Traffic<span>Force</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">⬡ Dashboard</a></li>
+    <li><a href="/add" class="active">⊕ Log Violation</a></li>
+    <li><a href="/search">⌕ Search</a></li>
+  </ul>
+  <div class="nav-officer">
+    <div class="officer-pill">
+      <div class="officer-avatar">{{ session.officer_name[0] }}</div>
+      <div class="officer-info">
+        <div class="officer-name">{{ session.officer_name }}</div>
+        <div class="officer-sub">{{ session.station }}</div>
+      </div>
+    </div>
+    <a href="/logout" class="btn-logout">⏻ Logout</a>
+  </div>
+</nav>
+
+
+<div class="statusbar">
+  <div class="status-online"><div class="dot"></div>SYSTEM ONLINE</div>
+  <div class="status-station">🏢 {{ session.station }} &nbsp;·&nbsp; {{ session.badge }} </div>
+</div>
+
+<main class="wrap">
+
+  <div class="pg-header">
+    <div class="pg-badge">⊕ New Entry</div>
+    <h1>Log Traffic<span class="hi">Violation</span></h1>
+    <p>Complete all fields accurately. Record will be permanently stored and attributed to your badge.</p>
+  </div>
+
+  {% if success %}
+  <div class="success" style="max-width:680px;margin:0 auto 22px;">
+    ✅ &nbsp; Violation successfully logged and attributed to <strong>{{ session.officer_name }}</strong> — {{ session.station }}.
+  </div>
+  {% endif %}
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-head-icon">🚨</div>
+      <div>
+        <h2>Violation Entry Form</h2>
+        <p>Officer:  {{ session.officer_name }} |&nbsp; {{ session.station }} &nbsp;|&nbsp; Badge: {{ session.badge }}</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <form method="POST" action="/add">
+
+        
+        <div class="sec-label">Reporting Officer</div>
+        <div class="grid2">
+          <div class="fg">
+            <label>Officer Name</label>
+            <input type="text" value="{{ session.officer_name }}" readonly/>
+          </div>
+          <div class="fg">
+            <label>Badge Number</label>
+            <input type="text" value="{{ session.badge }}" readonly/>
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:14px;">
+          <div class="fg">
+            <label>Station</label>
+            <input type="text" value="{{ session.station }}" readonly/>
+          </div>
+        </div>
+
+        
+        <div class="sec-label">Vehicle Information</div>
+        <div class="grid2">
+          <div class="fg">
+            <label for="vehicle">Vehicle Number *</label>
+            <input type="text" id="vehicle" name="vehicle"
+              placeholder="e.g. TN 38 AB 1234" required/>
+          </div>
+          <div class="fg">
+            <label for="phone">Owner Phone</label>
+            <input type="tel" id="phone" name="phone"
+              placeholder="e.g. +91 98765 43210"/>
+          </div>
+        </div>
+        <div class="grid1">
+          <div class="fg">
+            <label for="owner">Owner Full Name</label>
+            <input type="text" id="owner" name="owner"
+              placeholder="Full legal name of the vehicle owner"/>
+          </div>
+        </div>
+
+       
+        <div class="sec-label">Violation Details</div>
+        <div class="grid2">
+          <div class="fg">
+            <label for="violation">Violation Type *</label>
+            <select id="violation" name="violation" required>
+              <option value="" disabled selected>Select violation</option>
+              <option value="Speeding">Speeding</option>
+              <option value="Signal Jump">Signal Jump</option>
+              <option value="No Helmet">No Helmet</option>
+              <option value="No Seatbelt">No Seatbelt</option>
+              <option value="DUI">DUI / Drunk Driving</option>
+              <option value="Wrong Lane">Wrong Lane</option>
+              <option value="No Parking">No Parking Zone</option>
+              <option value="Wrong Way">Wrong-Way Driving</option>
+              <option value="Mobile Phone Use">Mobile Phone Use</option>
+              <option value="Overloading">Overloading</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="fine">Fine Amount (₹) *</label>
+            <input type="number" id="fine" name="fine"
+              placeholder="e.g. 500" min="0" required/>
+          </div>
+        </div>
+        <div class="grid1">
+          <div class="fg">
+            <label for="location">Incident Location</label>
+            <input type="text" id="location" name="location"
+              placeholder="Street / Landmark / Enforcement Zone"/>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">⊕ &nbsp; Submit Violation Record</button>
+
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2025 traffic_case_tracker &nbsp;|&nbsp; Authorized Enforcement Use Only &nbsp;|&nbsp; All Sessions Monitored
+</footer>
+
+</body>
+</html>

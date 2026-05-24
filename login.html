@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Officer Login — Traffic_case_Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="login-card">
+
+
+    <div class="login-card-head">
+      <div class="login-logo">🛡</div>
+      <h1>Traffic<span> Case-Tracker</span></h1>
+      <p>ENFORCEMENT OFFICER PORTAL — AUTHORIZED ACCESS ONLY</p>
+    </div>
+
+    <div class="login-body">
+
+      {% if error %}
+      <div class="error-box">⚠ {{ error }}</div>
+      {% endif %}
+
+      <div class="sec-label">Officer Credentials</div>
+
+      <form method="POST" action="/login">
+
+        <div class="fg">
+          <label for="badge">Badge Number</label>
+          <input
+            type="text"
+            id="badge"
+            name="badge"
+            placeholder="e.g. TF-001"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="fg" style="margin-top:14px;">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-primary" style="margin-top:22px;">
+          🔓 &nbsp; Access Command Center
+        </button>
+
+      </form>
+    </div>
+
+    <div class="login-footer">
+      All sessions are logged &nbsp;|&nbsp; Unauthorized access is a criminal offence
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

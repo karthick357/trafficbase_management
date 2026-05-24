@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Dashboard — traffic_case_tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-hex">🛡</div>
+    <span class="nav-title">Traffic<span> Case-Tracker</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">⬡ Dashboard</a></li>
+    <li><a href="/add">⊕ Log Violation</a></li>
+    <li><a href="/search">⌕ Search</a></li>
+  </ul>
+  <div class="nav-officer">
+    <div class="officer-pill">
+      <div class="officer-avatar">{{ session.officer_name[0] }}</div>
+      <div class="officer-info">
+        <div class="officer-name">{{ session.officer_name }}</div>
+        <div class="officer-sub">{{ session.station }}</div>
+      </div>
+    </div>
+    <a href="/logout" class="btn-logout">⏻ Logout</a>
+  </div>
+</nav>
+
+
+<div class="statusbar">
+  <div class="status-online">
+    <div class="dot"></div>
+    SYSTEM ONLINE &nbsp;|&nbsp; SESSION ACTIVE
+  </div>
+  <div class="status-station">
+    🏢 {{ session.station }} &nbsp;·&nbsp; BADGE: {{ session.badge }} 
+  </div>
+</div>
+
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Speed Limit Monitoring Active</span>
+    <span class="ticker-item">Signal Jump Detection Online</span>
+    <span class="ticker-item">DUI Enforcement Enabled</span>
+    <span class="ticker-item">No-Parking Surveillance Live</span>
+    <span class="ticker-item">Wrong-Way Driver Alert System</span>
+    <span class="ticker-item">Helmet Law Compliance Check</span>
+    <span class="ticker-item">Speed Limit Monitoring Active</span>
+    <span class="ticker-item">Signal Jump Detection Online</span>
+    <span class="ticker-item">DUI Enforcement Enabled</span>
+    <span class="ticker-item">No-Parking Surveillance Live</span>
+    <span class="ticker-item">Wrong-Way Driver Alert System</span>
+    <span class="ticker-item">Helmet Law Compliance Check</span>
+  </div>
+</div>
+
+
+<main class="wrap">
+
+  <div class="pg-header">
+    <div class="pg-badge">🔴 Live Command Center</div>
+    <h1>
+      Traffic Violation
+      <span class="hi">Command Center</span>
+    </h1>
+    <p>Welcome, <strong> {{ session.officer_name }}</strong> — {{ session.station }}</p>
+  </div>
+
+  
+  <div class="stats-row">
+    <div class="stat-card r">
+      <div class="stat-icon">🚨</div>
+      <div class="stat-val">{{ stats.total_violations }}</div>
+      <div class="stat-lbl">Total Violations Logged</div>
+    </div>
+    <div class="stat-card a">
+      <div class="stat-icon">🚗</div>
+      <div class="stat-val">{{ stats.total_vehicles }}</div>
+      <div class="stat-lbl">Vehicles Registered</div>
+    </div>
+    <div class="stat-card c">
+      <div class="stat-icon">📋</div>
+      <div class="stat-val">{{ stats.my_records }}</div>
+      <div class="stat-lbl">My Records This Session</div>
+    </div>
+  </div>
+
+ 
+  <div class="action-grid">
+    <a href="/add" class="action-card add">
+      <div class="ac-icon">⊕</div>
+      <h2>Log Violation</h2>
+      <p>Record a new traffic violation incident. Capture vehicle details, owner information, violation type, fine amount, and enforcement location.</p>
+      <div class="ac-cta">Open Form <span class="arrow">→</span></div>
+    </a>
+    <a href="/search" class="action-card srch">
+      <div class="ac-icon">⌕</div>
+      <h2>Search Records</h2>
+      <p>Look up the complete violation history for any registered vehicle. View all incidents with officer details, fine amounts, and timestamps.</p>
+      <div class="ac-cta">Search Database <span class="arrow">→</span></div>
+    </a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2025 traffic_case_tracker &nbsp;|&nbsp; Authorized Enforcement Use Only &nbsp;|&nbsp; All Sessions Monitored
+</footer>
+
+</body>
+</html>
